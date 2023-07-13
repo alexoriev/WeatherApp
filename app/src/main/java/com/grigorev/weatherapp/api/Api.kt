@@ -1,8 +1,11 @@
 package com.grigorev.weatherapp.api
 
 import com.grigorev.weatherapp.dto.CurrentWeather
+import com.grigorev.weatherapp.BuildConfig
 import com.grigorev.weatherapp.dto.FiveDaysForecast
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 private const val ST_PETERSBURG_ID = 498817
@@ -15,5 +18,13 @@ interface Api {
 
     @GET("forecast?id=${ST_PETERSBURG_ID}&appid=${API_KEY}&units=metric")
     suspend fun getFiveDaysForecast(): Response<FiveDaysForecast>
+
+    companion object {
+        val apiClient: Api = Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(Api::class.java)
+    }
 
 }
