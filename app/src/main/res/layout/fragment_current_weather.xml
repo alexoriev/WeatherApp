@@ -14,12 +14,12 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
+        android:text="@string/saint_petersburg"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/saint_petersburg"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/date_time"
@@ -27,13 +27,13 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
+        android:text="@string/date_time"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/city_name"
-        android:text="@string/date_time"
-        tools:text="@tools:sample/date/ddmmyy"/>
+        tools:text="@tools:sample/date/ddmmyy" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
@@ -42,17 +42,26 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
+    <ImageView
+        android:id="@+id/weather_icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:contentDescription="@string/weather_icon"
+        app:layout_constraintBottom_toBottomOf="@id/weather_description"
+        app:layout_constraintEnd_toStartOf="@id/weather_description"
+        app:layout_constraintTop_toTopOf="@id/weather_description" />
+
     <TextView
         android:id="@+id/weather_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/top_guideline"
-        android:text="@string/weather_description"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
+        android:text="@string/weather_description"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_guideline"
         tools:text="@tools:sample/full_names" />
 
 
@@ -62,12 +71,12 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
+        android:text="@string/temperature"
         android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/weather_description"
-        android:text="@string/temperature"
-        tools:text="25"/>
+        tools:text="25" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,11 +96,11 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
+        android:text="@string/feels_like"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temperature"
-        android:text="@string/feels_like" />
+        app:layout_constraintTop_toBottomOf="@id/temperature" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/details_guideline"
@@ -103,9 +112,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/details_guideline"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="3"
+        app:layout_constraintTop_toBottomOf="@id/details_guideline">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -119,9 +128,9 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/humidity"
                 android:src="@drawable/humidity"
-                app:tint="@color/white"
-                android:contentDescription="@string/humidity" />
+                app:tint="@color/white" />
 
             <androidx.legacy.widget.Space
                 android:layout_width="wrap_content"
@@ -157,9 +166,9 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/wind_speed"
                 android:src="@drawable/wind_speed"
-                app:tint="@color/white"
-                android:contentDescription="@string/wind_speed" />
+                app:tint="@color/white" />
 
             <androidx.legacy.widget.Space
                 android:layout_width="wrap_content"
@@ -195,9 +204,9 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:contentDescription="@string/pressure"
                 android:src="@drawable/pressure"
-                app:tint="@color/white"
-                android:contentDescription="@string/pressure" />
+                app:tint="@color/white" />
 
             <androidx.legacy.widget.Space
                 android:layout_width="wrap_content"

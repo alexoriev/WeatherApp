@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.FragmentCurrentWeatherBinding
 import com.grigorev.weatherapp.util.TimeConverter
@@ -50,6 +51,13 @@ class CurrentWeatherFragment : Fragment() {
                     R.string.pressure_text,
                     currentWeather.main?.pressure.toString(),
                 )
+
+                val iconUrl =
+                    "https://openweathermap.org/img/wn/${currentWeather.weather?.get(0)?.icon}.png"
+
+                Glide.with(weatherIcon)
+                    .load(iconUrl)
+                    .into(weatherIcon)
 
                 buttonDetails.setOnClickListener {
                     findNavController().navigate(R.id.detailsFragment)

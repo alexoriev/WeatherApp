@@ -2,11 +2,12 @@ package com.grigorev.weatherapp.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.FragmentDetailsBinding
 import com.grigorev.weatherapp.util.TimeConverter
@@ -63,6 +64,13 @@ class DetailsFragment : Fragment() {
             )
             sunrise.text = TimeConverter().formatUnixTimeToTime(currentWeather.sys!!.sunrise)
             sunset.text = TimeConverter().formatUnixTimeToTime(currentWeather.sys.sunset)
+
+            val iconUrl =
+                "https://openweathermap.org/img/wn/${currentWeather.weather?.get(0)?.icon}.png"
+
+            Glide.with(weatherIcon)
+                .load(iconUrl)
+                .into(weatherIcon)
         }
 
         return binding.root
