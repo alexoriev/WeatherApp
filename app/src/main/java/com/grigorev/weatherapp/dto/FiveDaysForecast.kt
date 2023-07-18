@@ -36,7 +36,3 @@ data class Rain(
     val `3h`: Double
 )
 
-data class Sys(
-    val pod: String
-)
-

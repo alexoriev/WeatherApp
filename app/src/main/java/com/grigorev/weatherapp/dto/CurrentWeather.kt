@@ -46,3 +46,8 @@ data class Wind(
     val gust: Double = 0.0,
     val speed: Double = 0.0
 )
+
+data class Sys(
+    val sunrise: Int = 0,
+    val sunset: Int = 0
+)
