@@ -11,10 +11,9 @@ class WeatherRepositoryImpl : WeatherRepository {
         try {
             val response = Api.apiClient.getCurrentWeather()
             if (!response.isSuccessful) {
-                throw Exception("${response.code()}: ${response.message()}")
+                throw Exception()
             }
-            currentWeather =
-                response.body() ?: throw Exception("${response.code()}: ${response.message()}")
+            currentWeather = response.body() ?: throw Exception()
         } catch (e: Exception) {
             throw e
         }
@@ -26,11 +25,9 @@ class WeatherRepositoryImpl : WeatherRepository {
         try {
             val response = Api.apiClient.getFiveDaysForecast()
             if (!response.isSuccessful) {
-                throw Exception("${response.code()}: ${response.message()}")
+                throw Exception()
             }
-            forecast =
-                response.body()?.list
-                    ?: throw Exception("${response.code()}: ${response.message()}")
+            forecast = response.body()?.list ?: throw Exception()
         } catch (e: Exception) {
             throw e
         }

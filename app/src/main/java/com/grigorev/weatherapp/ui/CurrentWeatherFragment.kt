@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -40,45 +41,48 @@ class CurrentWeatherFragment : Fragment() {
 
             val currentWeather = viewModel.weather.value
 
-            if (currentWeather != emptyWeather) {
-                binding.progressBar.visibility = View.GONE
-                binding.celsius.visibility = View.VISIBLE
+            viewModel.error.observe(viewLifecycleOwner) {
+                Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
             }
 
-            binding.apply {
-                dateTime.text = TimeConverter().formatUnixTimeToDateTime(currentWeather!!.dt)
-                weatherDescription.text = currentWeather.weather[0].main
-                temperature.text = currentWeather.main?.temp?.toInt().toString()
-                feelsLike.text = context?.getString(
-                    R.string.feels_like,
-                    currentWeather.main?.feels_like?.toInt().toString()
-                )
-                humidity.text = context?.getString(
-                    R.string.humidity_text,
-                    currentWeather.main?.humidity.toString(),
-                )
-                windSpeed.text = context?.getString(
-                    R.string.wind_speed_text,
-                    currentWeather.wind?.speed.toString(),
-                )
-                pressure.text = context?.getString(
-                    R.string.pressure_text,
-                    currentWeather.main?.pressure.toString(),
-                )
+            if (currentWeather != emptyWeather) {
+                binding.apply {
+                    binding.progressBar.visibility = View.GONE
+                    binding.celsius.visibility = View.VISIBLE
+                    dateTime.text = TimeConverter().formatUnixTimeToDateTime(currentWeather!!.dt)
+                    weatherDescription.text = currentWeather.weather[0].main
+                    temperature.text = currentWeather.main?.temp?.toInt().toString()
+                    feelsLike.text = context?.getString(
+                        R.string.feels_like,
+                        currentWeather.main?.feels_like?.toInt().toString()
+                    )
+                    humidity.text = context?.getString(
+                        R.string.humidity_text,
+                        currentWeather.main?.humidity.toString(),
+                    )
+                    windSpeed.text = context?.getString(
+                        R.string.wind_speed_text,
+                        currentWeather.wind?.speed.toString(),
+                    )
+                    pressure.text = context?.getString(
+                        R.string.pressure_text,
+                        currentWeather.main?.pressure.toString(),
+                    )
 
-                val iconUrl =
-                    "https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png"
+                    val iconUrl =
+                        "https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png"
 
-                Glide.with(weatherIcon)
-                    .load(iconUrl)
-                    .into(weatherIcon)
+                    Glide.with(weatherIcon)
+                        .load(iconUrl)
+                        .into(weatherIcon)
 
-                buttonDetails.setOnClickListener {
-                    findNavController().navigate(R.id.detailsFragment)
-                }
+                    buttonDetails.setOnClickListener {
+                        findNavController().navigate(R.id.detailsFragment)
+                    }
 
-                buttonForecast.setOnClickListener {
-                    findNavController().navigate(R.id.forecastFragment)
+                    buttonForecast.setOnClickListener {
+                        findNavController().navigate(R.id.forecastFragment)
+                    }
                 }
             }
         }
