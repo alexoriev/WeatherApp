@@ -11,24 +11,28 @@ import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.FragmentDetailsBinding
 import com.grigorev.weatherapp.util.TimeConverter
+import com.grigorev.weatherapp.viewmodel.WeatherViewModel
 
 class DetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailsBinding
     private val viewModel: WeatherViewModel by activityViewModels()
 
-    @SuppressLint("StringFormatInvalid")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailsBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
+    @SuppressLint("StringFormatInvalid")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val currentWeather = viewModel.weather.value
 
         binding.apply {
             dateTime.text = TimeConverter().formatUnixTimeToDateTime(currentWeather!!.dt)
-            weatherDescription.text = currentWeather.weather?.get(0)?.description
+            weatherDescription.text = currentWeather.weather[0].description
             temperature.text = currentWeather.main?.temp?.toInt().toString()
             feelsLike.text = context?.getString(
                 R.string.feels_like,
@@ -66,13 +70,11 @@ class DetailsFragment : Fragment() {
             sunset.text = TimeConverter().formatUnixTimeToTime(currentWeather.sys.sunset)
 
             val iconUrl =
-                "https://openweathermap.org/img/wn/${currentWeather.weather?.get(0)?.icon}.png"
+                "https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png"
 
             Glide.with(weatherIcon)
                 .load(iconUrl)
                 .into(weatherIcon)
         }
-
-        return binding.root
     }
 }

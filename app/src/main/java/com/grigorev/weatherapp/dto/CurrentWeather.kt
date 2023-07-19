@@ -1,10 +1,7 @@
 package com.grigorev.weatherapp.dto
 
 data class CurrentWeather(
-    val base: String = "",
     val clouds: Clouds? = null,
-    val cod: Int = 0,
-    val coord: Coord? = null,
     val dt: Int = 0,
     val id: Int = 0,
     val main: Main? = null,
@@ -12,17 +9,12 @@ data class CurrentWeather(
     val sys: Sys? = null,
     val timezone: Int = 0,
     val visibility: Int = 0,
-    val weather: List<Weather>? = null,
+    val weather: List<Weather> = emptyList(),
     val wind: Wind? = null
 )
 
 data class Clouds(
     val all: Int = 0
-)
-
-data class Coord(
-    val lat: Double = 0.0,
-    val lon: Double = 0.0
 )
 
 data class Main(

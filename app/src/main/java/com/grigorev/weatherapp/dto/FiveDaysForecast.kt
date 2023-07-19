@@ -1,38 +1,29 @@
 package com.grigorev.weatherapp.dto
 
 data class FiveDaysForecast(
-    val city: City,
-    val cnt: Int,
-    val cod: String,
-    val list: List<Forecast>,
-    val message: Int
+    val city: City? = null,
+    val cnt: Int = 0,
+    val list: List<Forecast> = emptyList(),
+    val message: Int = 0
 )
 
 data class City(
-    val coord: Coord,
-    val country: String,
-    val id: Int,
-    val name: String,
-    val population: Int,
-    val sunrise: Int,
-    val sunset: Int,
-    val timezone: Int
+    val country: String = "",
+    val id: Int = 0,
+    val name: String = "",
+    val population: Int = 0,
+    val sunrise: Int = 0,
+    val sunset: Int = 0,
+    val timezone: Int = 0
 )
 
 data class Forecast(
-    val clouds: Clouds,
-    val dt: Int,
-    val dt_txt: String,
-    val main: Main,
-    val pop: Double,
-    val rain: Rain?,
-    val sys: Sys,
-    val visibility: Int,
-    val weather: List<Weather>,
-    val wind: Wind
+    val clouds: Clouds? = null,
+    val dt: Int = 0,
+    val dt_txt: String = "",
+    val main: Main? = null,
+    val pop: Double = 0.0,
+    val visibility: Int = 0,
+    val weather: List<Weather> = emptyList(),
+    val wind: Wind? = null
 )
-
-data class Rain(
-    val `3h`: Double
-)
-

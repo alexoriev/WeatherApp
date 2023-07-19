@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="elevation">16dp</dimen>
+    <dimen name="common_padding">16dp</dimen>
+    <dimen name="item_layout_margin">8dp</dimen>
+    <dimen name="forecast_icon_size">48dp</dimen>
+</resources>

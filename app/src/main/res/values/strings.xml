@@ -12,6 +12,7 @@
     <string name="wind_speed_text">%1$s m/s</string>
     <string name="pressure_text">%1$s hPa</string>
     <string name="temperature">%1$s%</string>
+    <string name="temperature_forecast_item">%1$s°C</string>
     <string name="date_time">%1$s</string>
     <string name="weather_description">1$s%</string>
     <string name="cloudiness_text">%1$s \%%</string>
@@ -25,4 +26,6 @@
     <string name="visibility">Visibility</string>
     <string name="visibility_text">%1$s m</string>
     <string name="weather_icon">Weather icon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

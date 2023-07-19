@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.FragmentCurrentWeatherBinding
 import com.grigorev.weatherapp.util.TimeConverter
+import com.grigorev.weatherapp.viewmodel.WeatherViewModel
+import com.grigorev.weatherapp.viewmodel.emptyWeather
 import kotlinx.coroutines.launch
 
 class CurrentWeatherFragment : Fragment() {
@@ -20,20 +22,26 @@ class CurrentWeatherFragment : Fragment() {
     private lateinit var binding: FragmentCurrentWeatherBinding
     private val viewModel: WeatherViewModel by activityViewModels()
 
-    @SuppressLint("StringFormatInvalid")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCurrentWeatherBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
+    @SuppressLint("StringFormatInvalid")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lifecycleScope.launch {
-            viewModel.getWeather().join()
+            if (viewModel.weather.value == emptyWeather) {
+                viewModel.getWeather().join()
+            }
+
             val currentWeather = viewModel.weather.value
 
             binding.apply {
                 dateTime.text = TimeConverter().formatUnixTimeToDateTime(currentWeather!!.dt)
-                weatherDescription.text = currentWeather.weather?.get(0)?.description
+                weatherDescription.text = currentWeather.weather[0].main
                 temperature.text = currentWeather.main?.temp?.toInt().toString()
                 feelsLike.text = context?.getString(
                     R.string.feels_like,
@@ -53,7 +61,7 @@ class CurrentWeatherFragment : Fragment() {
                 )
 
                 val iconUrl =
-                    "https://openweathermap.org/img/wn/${currentWeather.weather?.get(0)?.icon}.png"
+                    "https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png"
 
                 Glide.with(weatherIcon)
                     .load(iconUrl)
@@ -62,8 +70,11 @@ class CurrentWeatherFragment : Fragment() {
                 buttonDetails.setOnClickListener {
                     findNavController().navigate(R.id.detailsFragment)
                 }
+
+                buttonForecast.setOnClickListener {
+                    findNavController().navigate(R.id.forecastFragment)
+                }
             }
         }
-        return binding.root
     }
 }
