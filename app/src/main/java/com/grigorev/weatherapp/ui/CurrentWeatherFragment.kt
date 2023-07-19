@@ -34,10 +34,16 @@ class CurrentWeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lifecycleScope.launch {
             if (viewModel.weather.value == emptyWeather) {
+                binding.celsius.visibility = View.INVISIBLE
                 viewModel.getWeather().join()
             }
 
             val currentWeather = viewModel.weather.value
+
+            if (currentWeather != emptyWeather) {
+                binding.progressBar.visibility = View.GONE
+                binding.celsius.visibility = View.VISIBLE
+            }
 
             binding.apply {
                 dateTime.text = TimeConverter().formatUnixTimeToDateTime(currentWeather!!.dt)

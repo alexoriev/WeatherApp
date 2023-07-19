@@ -35,6 +35,11 @@ class ForecastFragment : Fragment() {
             viewModel.forecast.observe(viewLifecycleOwner) {
                 adapter.submitList(it)
             }
+
+            if (viewModel.forecast.value != emptyForecast.list) {
+                binding.progressBar.visibility = View.GONE
+            }
+
         }
         return binding.root
     }

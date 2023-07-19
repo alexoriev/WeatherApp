@@ -8,6 +8,17 @@
     android:padding="@dimen/common_padding"
     tools:context=".ui.CurrentWeatherFragment">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/temperature"
+        app:layout_constraintBottom_toBottomOf="@id/temperature"/>
+
     <TextView
         android:id="@+id/city_name"
         android:layout_width="wrap_content"
@@ -27,7 +38,6 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
-        android:text="@string/date_time"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +67,6 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
-        android:text="@string/weather_description"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +80,6 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
-        android:text="@string/temperature"
         android:textSize="80sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +87,7 @@
         tools:text="25" />
 
     <TextView
+        android:id="@+id/celsius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="12dp"
@@ -96,11 +105,11 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/light_blue"
         android:shadowRadius="5"
-        android:text="@string/feels_like"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temperature" />
+        app:layout_constraintTop_toBottomOf="@id/temperature"
+        tools:text="@string/feels_like" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/details_guideline"
@@ -146,8 +155,9 @@
                 android:id="@+id/humidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/humidity_text"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="@string/humidity_text" />
+
         </LinearLayout>
 
         <androidx.legacy.widget.Space
@@ -184,8 +194,9 @@
                 android:id="@+id/wind_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wind_speed_text"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="@string/wind_speed_text" />
+
         </LinearLayout>
 
         <androidx.legacy.widget.Space
@@ -222,8 +233,9 @@
                 android:id="@+id/pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pressure_text"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="@string/pressure_text" />
+
         </LinearLayout>
 
     </LinearLayout>

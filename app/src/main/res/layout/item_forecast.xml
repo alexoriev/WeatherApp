@@ -50,9 +50,8 @@
 
         <TextView
             android:id="@+id/date_time"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
             android:singleLine="true"
             android:text=""
             android:textSize="12sp"
