@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WeatherApp</string>
+    <string name="app_name">SPb Weather</string>
     <string name="humidity">Humidity</string>
     <string name="wind_speed">Wind speed</string>
     <string name="pressure">Pressure</string>
