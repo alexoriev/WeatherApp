@@ -25,4 +25,8 @@
 
 Скриншоты приложения:
 
-<img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/6ed95425-9021-41b8-a515-542260dc1383" width="200" /></br></br><img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/faa1dced-076d-414e-8198-f37a20e2030f" width="200" /></br></br><img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/0f4f5885-7568-475d-84ec-7cf05670e004" width="200" /></br></br><img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/b36fa51a-8fae-4d13-9ef0-af8fcd837c87" width="200" /></br></br><img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/080d1780-4958-4d11-8012-32c73768e561" width="200" /></br></br>
+<img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/6ed95425-9021-41b8-a515-542260dc1383" width="150" />
+<img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/faa1dced-076d-414e-8198-f37a20e2030f" width="150" />
+<img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/0f4f5885-7568-475d-84ec-7cf05670e004" width="150" />
+<img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/b36fa51a-8fae-4d13-9ef0-af8fcd837c87" width="150" />
+<img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/080d1780-4958-4d11-8012-32c73768e561" width="150" />
