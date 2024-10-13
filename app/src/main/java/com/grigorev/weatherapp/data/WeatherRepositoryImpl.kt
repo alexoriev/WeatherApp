@@ -1,8 +1,8 @@
-package com.grigorev.weatherapp.repository
+package com.grigorev.weatherapp.data
 
-import com.grigorev.weatherapp.api.Api
-import com.grigorev.weatherapp.dto.CurrentWeather
-import com.grigorev.weatherapp.dto.Forecast
+import com.grigorev.weatherapp.domain.CurrentWeather
+import com.grigorev.weatherapp.domain.Forecast
+import com.grigorev.weatherapp.domain.WeatherRepository
 
 class WeatherRepositoryImpl : WeatherRepository {
 

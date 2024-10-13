@@ -1,8 +1,8 @@
-package com.grigorev.weatherapp.api
+package com.grigorev.weatherapp.data
 
-import com.grigorev.weatherapp.dto.CurrentWeather
 import com.grigorev.weatherapp.BuildConfig
-import com.grigorev.weatherapp.dto.FiveDaysForecast
+import com.grigorev.weatherapp.domain.CurrentWeather
+import com.grigorev.weatherapp.domain.FiveDaysForecast
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,10 +13,10 @@ private const val API_KEY = "d9e6fe2ca9bd114df14262b014663852"
 
 interface Api {
 
-    @GET("weather?id=${ST_PETERSBURG_ID}&appid=${API_KEY}&units=metric")
+    @GET("weather?id=$ST_PETERSBURG_ID&appid=$API_KEY&units=metric")
     suspend fun getCurrentWeather(): Response<CurrentWeather>
 
-    @GET("forecast?id=${ST_PETERSBURG_ID}&appid=${API_KEY}&units=metric")
+    @GET("forecast?id=$ST_PETERSBURG_ID&appid=$API_KEY&units=metric")
     suspend fun getFiveDaysForecast(): Response<FiveDaysForecast>
 
     companion object {

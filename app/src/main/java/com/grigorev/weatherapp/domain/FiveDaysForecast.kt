@@ -1,4 +1,4 @@
-package com.grigorev.weatherapp.dto
+package com.grigorev.weatherapp.domain
 
 data class FiveDaysForecast(
     val city: City? = null,

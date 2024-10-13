@@ -1,4 +1,4 @@
-package com.grigorev.weatherapp.ui
+package com.grigorev.weatherapp.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,8 +14,6 @@ import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.FragmentCurrentWeatherBinding
 import com.grigorev.weatherapp.util.TimeConverter
-import com.grigorev.weatherapp.viewmodel.WeatherViewModel
-import com.grigorev.weatherapp.viewmodel.emptyWeather
 import kotlinx.coroutines.launch
 
 class CurrentWeatherFragment : Fragment() {

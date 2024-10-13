@@ -1,4 +1,4 @@
-package com.grigorev.weatherapp.ui
+package com.grigorev.weatherapp.presentation
 
 import android.annotation.SuppressLint
 import android.content.Intent

@@ -1,12 +1,12 @@
-package com.grigorev.weatherapp.viewmodel
+package com.grigorev.weatherapp.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.grigorev.weatherapp.dto.CurrentWeather
-import com.grigorev.weatherapp.dto.FiveDaysForecast
-import com.grigorev.weatherapp.repository.WeatherRepositoryImpl
+import com.grigorev.weatherapp.domain.CurrentWeather
+import com.grigorev.weatherapp.domain.FiveDaysForecast
+import com.grigorev.weatherapp.data.WeatherRepositoryImpl
 import com.grigorev.weatherapp.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,8 +32,10 @@ val emptyForecast = FiveDaysForecast(
     message = 0,
 )
 
+//TODO: Split into separate LiveData classes for different fragments
 class WeatherViewModel : ViewModel() {
 
+    //TODO: Implement via DI
     private val repository = WeatherRepositoryImpl()
 
     private val _error = SingleLiveEvent<Throwable>()

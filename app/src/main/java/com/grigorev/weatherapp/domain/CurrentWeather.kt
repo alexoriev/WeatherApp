@@ -1,4 +1,4 @@
-package com.grigorev.weatherapp.dto
+package com.grigorev.weatherapp.domain
 
 data class CurrentWeather(
     val clouds: Clouds? = null,

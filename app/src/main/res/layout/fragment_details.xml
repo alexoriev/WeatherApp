@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_drawable"
     android:padding="@dimen/common_padding"
-    tools:context=".ui.DetailsFragment">
+    tools:context=".presentation.DetailsFragment">
 
     <TextView
         android:id="@+id/temperature"

@@ -1,4 +1,4 @@
-package com.grigorev.weatherapp.ui
+package com.grigorev.weatherapp.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.grigorev.weatherapp.adapter.ForecastAdapter
 import com.grigorev.weatherapp.databinding.FragmentForecastBinding
-import com.grigorev.weatherapp.viewmodel.WeatherViewModel
-import com.grigorev.weatherapp.viewmodel.emptyForecast
 import kotlinx.coroutines.launch
 
 class ForecastFragment : Fragment() {

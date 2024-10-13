@@ -1,4 +1,4 @@
-package com.grigorev.weatherapp.adapter
+package com.grigorev.weatherapp.presentation
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.ItemForecastBinding
-import com.grigorev.weatherapp.dto.Forecast
+import com.grigorev.weatherapp.domain.Forecast
 import com.grigorev.weatherapp.util.TimeConverter
 
 class ForecastAdapter : ListAdapter<Forecast, ViewHolder>(PostDiffCallback()) {

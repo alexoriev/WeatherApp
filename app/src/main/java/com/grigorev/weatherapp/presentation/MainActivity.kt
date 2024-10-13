@@ -1,4 +1,4 @@
-package com.grigorev.weatherapp.ui
+package com.grigorev.weatherapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

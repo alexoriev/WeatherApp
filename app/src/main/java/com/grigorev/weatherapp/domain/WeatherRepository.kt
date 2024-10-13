@@ -1,8 +1,4 @@
-package com.grigorev.weatherapp.repository
-
-import com.grigorev.weatherapp.dto.CurrentWeather
-import com.grigorev.weatherapp.dto.Forecast
-
+package com.grigorev.weatherapp.domain
 
 interface WeatherRepository {
 
