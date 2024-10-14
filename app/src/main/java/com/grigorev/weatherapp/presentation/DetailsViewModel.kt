@@ -12,19 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-val emptyWeather = CurrentWeather(
-    description = null,
-    iconUrl = null,
-    clouds = null,
-    dateTime = null,
-    main = null,
-    sys = null,
-    visibility = null,
-    weather = emptyList(),
-    wind = null
-)
-
-class CurrentWeatherViewModel @Inject constructor(
+class DetailsViewModel @Inject constructor(
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase
 ) : ViewModel() {
 
@@ -32,7 +20,7 @@ class CurrentWeatherViewModel @Inject constructor(
     val error: LiveData<Throwable>
         get() = _error
 
-    var weather = MutableLiveData(emptyWeather)
+    var weather = MutableLiveData<CurrentWeather>()
 
     fun getWeather() = viewModelScope.launch {
         withContext(Dispatchers.Default) {

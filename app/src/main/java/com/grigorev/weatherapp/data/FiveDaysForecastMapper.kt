@@ -9,15 +9,16 @@ import com.grigorev.weatherapp.domain.FiveDaysForecast
 import com.grigorev.weatherapp.domain.Forecast
 import com.grigorev.weatherapp.domain.MainForecast
 import com.grigorev.weatherapp.domain.WindForecast
+import javax.inject.Inject
 
-class FiveDaysForecastMapper {
+class FiveDaysForecastMapper @Inject constructor() {
     fun mapFiveDaysForecastFromDto(dto: FiveDaysForecastDto?): FiveDaysForecast? =
         dto?.let { value ->
             FiveDaysForecast(value.list.map { mapForecastFromDto(it) })
         }
 
     private fun mapForecastFromDto(dto: ForecastDto): Forecast = Forecast(
-        dateTime = dto.dt?.let { TimeConverter().formatUnixTimeToDateTime(it) },
+        dateTime = dto.dt?.let { TimeConverter.formatUnixTimeToDateTime(it) },
         main = mapMainForecastFromDto(dto.main),
         iconUrl = mapIconUrlFromDto(dto.weather),
         description = mapDescriptionFromDto(dto.weather),

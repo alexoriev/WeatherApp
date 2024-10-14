@@ -12,14 +12,15 @@ import com.grigorev.weatherapp.domain.Main
 import com.grigorev.weatherapp.domain.Sys
 import com.grigorev.weatherapp.domain.Weather
 import com.grigorev.weatherapp.domain.Wind
+import javax.inject.Inject
 
-class CurrentWeatherMapper {
+class CurrentWeatherMapper @Inject constructor() {
     fun mapCurrentWeatherFromDto(dto: CurrentWeatherDto?): CurrentWeather? = dto?.let {
         CurrentWeather(
             description = mapDescriptionFromDto(it.weather),
             iconUrl = mapIconUrlFromDto(it.weather),
             clouds = mapCloudsFromDto(it.clouds),
-            dateTime = it.dt?.let { dateTime -> TimeConverter().formatUnixTimeToDateTime(dateTime) },
+            dateTime = it.dt?.let { dateTime -> TimeConverter.formatUnixTimeToDateTime(dateTime) },
             main = mapMainFromDto(it.main),
             sys = mapSysFromDto(it.sys),
             visibility = it.visibility.toString(),
@@ -54,8 +55,8 @@ class CurrentWeatherMapper {
     }
 
     private fun mapSysFromDto(dto: SysDto?): Sys? = dto?.let {
-        Sys(sunrise = it.sunrise?.let { value -> TimeConverter().formatUnixTimeToTime(value) },
-            sunset = it.sunset?.let { value -> TimeConverter().formatUnixTimeToTime(value) })
+        Sys(sunrise = it.sunrise?.let { value -> TimeConverter.formatUnixTimeToTime(value) },
+            sunset = it.sunset?.let { value -> TimeConverter.formatUnixTimeToTime(value) })
     }
 
     private fun mapWeatherFromDto(dto: List<WeatherDto>): List<Weather> {
@@ -67,7 +68,7 @@ class CurrentWeatherMapper {
     private fun mapWindFromDto(dto: WindDto?): Wind? = dto?.let {
         Wind(
             deg = it.deg.toString(),
-            gust = it.gust.toString(),
+            gust = if (it.gust != null) it.gust.toString() else null,
             speed = it.speed.toString()
         )
     }

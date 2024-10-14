@@ -2,15 +2,17 @@ package com.grigorev.weatherapp.data
 
 import com.grigorev.weatherapp.domain.CurrentWeather
 import com.grigorev.weatherapp.domain.CurrentWeatherRepository
+import javax.inject.Inject
 
-class CurrentWeatherRepositoryImpl : CurrentWeatherRepository {
-
-    private val mapper = CurrentWeatherMapper()
+class CurrentWeatherRepositoryImpl @Inject constructor(
+    private val apiService: Api,
+    private val mapper: CurrentWeatherMapper
+) : CurrentWeatherRepository {
 
     override suspend fun getCurrentWeather(): CurrentWeather {
         lateinit var currentWeather: CurrentWeather
         try {
-            val response = Api.apiClient.getCurrentWeather()
+            val response = apiService.getCurrentWeather()
             if (!response.isSuccessful) {
                 throw Exception()
             }

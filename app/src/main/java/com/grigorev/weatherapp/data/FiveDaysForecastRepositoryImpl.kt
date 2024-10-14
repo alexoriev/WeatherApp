@@ -2,15 +2,17 @@ package com.grigorev.weatherapp.data
 
 import com.grigorev.weatherapp.domain.FiveDaysForecastRepository
 import com.grigorev.weatherapp.domain.Forecast
+import javax.inject.Inject
 
-class FiveDaysForecastRepositoryImpl : FiveDaysForecastRepository {
-
-    private val mapper = FiveDaysForecastMapper()
+class FiveDaysForecastRepositoryImpl @Inject constructor(
+    private val apiService: Api,
+    private val mapper: FiveDaysForecastMapper
+) : FiveDaysForecastRepository {
 
     override suspend fun getFiveDaysForecast(): List<Forecast> {
         lateinit var forecast: List<Forecast>
         try {
-            val response = Api.apiClient.getFiveDaysForecast()
+            val response = apiService.getFiveDaysForecast()
             if (!response.isSuccessful) {
                 throw Exception()
             }

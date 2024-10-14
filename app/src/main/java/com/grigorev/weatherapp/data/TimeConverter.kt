@@ -2,7 +2,7 @@ package com.grigorev.weatherapp.data
 
 import java.util.Locale
 
-class TimeConverter {
+object TimeConverter {
     fun formatUnixTimeToDateTime(dateTime: Int): String {
         val sdf = java.text.SimpleDateFormat("EEE, MMMM dd 'at' HH:mm ", Locale.US)
         val date = java.util.Date(dateTime * 1000L)

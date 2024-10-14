@@ -4,21 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.grigorev.weatherapp.data.FiveDaysForecastRepositoryImpl
 import com.grigorev.weatherapp.domain.FiveDaysForecast
 import com.grigorev.weatherapp.domain.GetFiveDaysForecastUseCase
 import com.grigorev.weatherapp.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 val emptyForecast = FiveDaysForecast(list = emptyList())
 
-class ForecastViewModel : ViewModel() {
-
-    //TODO: Implement via DI
-    private val repository = FiveDaysForecastRepositoryImpl()
-    private val getFiveDaysForecastUseCase = GetFiveDaysForecastUseCase(repository)
+class ForecastViewModel @Inject constructor(
+    private val getFiveDaysForecastUseCase: GetFiveDaysForecastUseCase
+) : ViewModel() {
 
     private val _error = SingleLiveEvent<Throwable>()
     val error: LiveData<Throwable>

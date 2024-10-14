@@ -30,8 +30,7 @@ class ViewHolder(private val binding: ItemForecastBinding) : RecyclerView.ViewHo
 
     fun bind(forecast: Forecast) {
         binding.apply {
-            val iconUrl =
-                "https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png"
+            val iconUrl = forecast.iconUrl
 
             Glide.with(forecastIcon)
                 .load(iconUrl)
