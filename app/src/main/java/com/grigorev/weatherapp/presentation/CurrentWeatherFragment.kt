@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class CurrentWeatherFragment : Fragment() {
 
     private lateinit var binding: FragmentCurrentWeatherBinding
-    private val viewModel: WeatherViewModel by activityViewModels()
+    private val viewModel: CurrentWeatherViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,12 +47,16 @@ class CurrentWeatherFragment : Fragment() {
                 binding.apply {
                     binding.progressBar.visibility = View.GONE
                     binding.celsius.visibility = View.VISIBLE
-                    dateTime.text = TimeConverter().formatUnixTimeToDateTime(currentWeather!!.dt)
+                    dateTime.text = currentWeather!!.dt?.let {
+                        TimeConverter().formatUnixTimeToDateTime(
+                            it
+                        )
+                    }
                     weatherDescription.text = currentWeather.weather[0].main
                     temperature.text = currentWeather.main?.temp?.toInt().toString()
                     feelsLike.text = context?.getString(
                         R.string.feels_like,
-                        currentWeather.main?.feels_like?.toInt().toString()
+                        currentWeather.main?.feelsLike?.toInt().toString()
                     )
                     humidity.text = context?.getString(
                         R.string.humidity_text,

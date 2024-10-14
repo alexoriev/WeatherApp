@@ -5,6 +5,8 @@ import com.grigorev.weatherapp.domain.CurrentWeatherRepository
 
 class CurrentWeatherRepositoryImpl : CurrentWeatherRepository {
 
+    private val mapper = CurrentWeatherMapper()
+
     override suspend fun getCurrentWeather(): CurrentWeather {
         lateinit var currentWeather: CurrentWeather
         try {
@@ -12,7 +14,7 @@ class CurrentWeatherRepositoryImpl : CurrentWeatherRepository {
             if (!response.isSuccessful) {
                 throw Exception()
             }
-            currentWeather = response.body() ?: throw Exception()
+            currentWeather = mapper.mapCurrentWeatherFromDto(response.body()) ?: throw Exception()
         } catch (e: Exception) {
             throw e
         }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.grigorev.weatherapp.data.FiveDaysForecastRepositoryImpl
-import com.grigorev.weatherapp.domain.FiveDaysForecast
 import com.grigorev.weatherapp.domain.Forecast
 import com.grigorev.weatherapp.domain.GetFiveDaysForecastUseCase
 import com.grigorev.weatherapp.util.SingleLiveEvent
@@ -13,12 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-val emptyForecast = FiveDaysForecast(
-    city = null,
-    cnt = 0,
-    list = emptyList(),
-    message = 0,
-)
+val emptyForecast: List<Forecast> = emptyList()
 
 class ForecastViewModel : ViewModel() {
 
@@ -30,7 +24,7 @@ class ForecastViewModel : ViewModel() {
     val error: LiveData<Throwable>
         get() = _error
 
-    var forecast = MutableLiveData(emptyForecast.list)
+    var forecast = MutableLiveData(emptyForecast)
 
     fun getForecast() = viewModelScope.launch {
         withContext(Dispatchers.Default) {

@@ -5,6 +5,8 @@ import com.grigorev.weatherapp.domain.Forecast
 
 class FiveDaysForecastRepositoryImpl : FiveDaysForecastRepository {
 
+    private val mapper = FiveDaysForecastMapper();
+
     override suspend fun getFiveDaysForecast(): List<Forecast> {
         lateinit var forecast: List<Forecast>
         try {
@@ -12,7 +14,7 @@ class FiveDaysForecastRepositoryImpl : FiveDaysForecastRepository {
             if (!response.isSuccessful) {
                 throw Exception()
             }
-            forecast = response.body()?.list ?: throw Exception()
+            forecast = mapper.mapFiveDaysForecastFromDto(response.body())?.list ?: throw Exception()
         } catch (e: Exception) {
             throw e
         }

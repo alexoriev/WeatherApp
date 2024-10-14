@@ -43,7 +43,7 @@ class ViewHolder(private val binding: ItemForecastBinding) : RecyclerView.ViewHo
                 forecast.main?.temp?.toInt().toString()
             )
             forecastText.text = forecast.weather[0].main
-            dateTime.text = TimeConverter().formatUnixTimeToDateTime(forecast.dt)
+            dateTime.text = forecast.dt?.let { TimeConverter().formatUnixTimeToDateTime(it) }
             humidity.text = humidity.context.getString(
                 R.string.humidity_text,
                 forecast.main?.humidity.toString()

@@ -15,17 +15,14 @@ import kotlinx.coroutines.withContext
 val emptyWeather = CurrentWeather(
     clouds = null,
     dt = 0,
-    id = 0,
     main = null,
-    name = "",
     sys = null,
-    timezone = 0,
     visibility = 0,
     weather = emptyList(),
     wind = null
 )
 
-class WeatherViewModel : ViewModel() {
+class CurrentWeatherViewModel : ViewModel() {
 
     //TODO: Implement via DI
     private val repository = CurrentWeatherRepositoryImpl()

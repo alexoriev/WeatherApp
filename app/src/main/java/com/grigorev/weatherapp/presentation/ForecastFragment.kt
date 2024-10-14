@@ -22,20 +22,16 @@ class ForecastFragment : Fragment() {
     ): View {
         binding = FragmentForecastBinding.inflate(layoutInflater)
         lifecycleScope.launch {
-            if (viewModel.forecast.value == emptyForecast.list) {
+            if (viewModel.forecast.value == emptyForecast) {
                 viewModel.getForecast().join()
+            } else {
+                binding.progressBar.visibility = View.GONE
             }
 
             val adapter = ForecastAdapter()
-
             binding.forecastList.adapter = adapter
-
             viewModel.forecast.observe(viewLifecycleOwner) {
                 adapter.submitList(it)
-            }
-
-            if (viewModel.forecast.value != emptyForecast.list) {
-                binding.progressBar.visibility = View.GONE
             }
         }
 

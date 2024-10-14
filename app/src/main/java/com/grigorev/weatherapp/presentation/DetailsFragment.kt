@@ -15,7 +15,7 @@ import com.grigorev.weatherapp.util.TimeConverter
 class DetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailsBinding
-    private val viewModel: WeatherViewModel by activityViewModels()
+    private val viewModel: CurrentWeatherViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,12 +30,12 @@ class DetailsFragment : Fragment() {
         val currentWeather = viewModel.weather.value
 
         binding.apply {
-            dateTime.text = TimeConverter().formatUnixTimeToDateTime(currentWeather!!.dt)
+            dateTime.text = currentWeather!!.dt?.let { TimeConverter().formatUnixTimeToDateTime(it) }
             weatherDescription.text = currentWeather.weather[0].description
             temperature.text = currentWeather.main?.temp?.toInt().toString()
             feelsLike.text = context?.getString(
                 R.string.feels_like,
-                currentWeather.main?.feels_like?.toInt().toString()
+                currentWeather.main?.feelsLike?.toInt().toString()
             )
             humidity.text = context?.getString(
                 R.string.humidity_text,
@@ -65,8 +65,12 @@ class DetailsFragment : Fragment() {
                 R.string.pressure_text,
                 currentWeather.main?.pressure.toString()
             )
-            sunrise.text = TimeConverter().formatUnixTimeToTime(currentWeather.sys!!.sunrise)
-            sunset.text = TimeConverter().formatUnixTimeToTime(currentWeather.sys.sunset)
+            sunrise.text = currentWeather.sys?.sunrise?.let {
+                TimeConverter().formatUnixTimeToTime(
+                    it
+                )
+            }
+            sunset.text = currentWeather.sys?.sunset?.let { TimeConverter().formatUnixTimeToTime(it) }
 
             val iconUrl =
                 "https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png"
