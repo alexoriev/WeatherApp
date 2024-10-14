@@ -14,12 +14,14 @@
 - у приложения должен быть АДЕКВАТНЫЙ и приятный дизайн.
 
 Стек:
-- MVVM
-- Single Activity
+- Clean Architecture/MVVM
+- Single Activity + Fragments
+- Jetpack Navigation
 - viewBinding
 - Retrofit
 - GSON
 - Glide
+- Dagger 2
 
 Бесплатные иконки взяты с icons8.com
 
