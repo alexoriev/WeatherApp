@@ -13,6 +13,24 @@ data class CurrentWeather(
     val wind: Wind? = null
 )
 
+data class Sys(
+    val sunrise: Int = 0,
+    val sunset: Int = 0
+)
+
+data class Wind(
+    val deg: Int = 0,
+    val gust: Double = 0.0,
+    val speed: Double = 0.0
+)
+
+data class Weather(
+    val description: String = "",
+    val icon: String = "",
+    val id: Int = 0,
+    val main: String = ""
+)
+
 data class Clouds(
     val all: Int = 0
 )
@@ -24,22 +42,4 @@ data class Main(
     val temp: Double = 0.0,
     val temp_max: Double = 0.0,
     val temp_min: Double = 0.0
-)
-
-data class Weather(
-    val description: String = "",
-    val icon: String = "",
-    val id: Int = 0,
-    val main: String = ""
-)
-
-data class Wind(
-    val deg: Int = 0,
-    val gust: Double = 0.0,
-    val speed: Double = 0.0
-)
-
-data class Sys(
-    val sunrise: Int = 0,
-    val sunset: Int = 0
 )

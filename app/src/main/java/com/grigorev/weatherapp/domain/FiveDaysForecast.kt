@@ -18,12 +18,38 @@ data class City(
 )
 
 data class Forecast(
-    val clouds: Clouds? = null,
+    val clouds: CloudsForecast? = null,
     val dt: Int = 0,
     val dt_txt: String = "",
-    val main: Main? = null,
+    val main: MainForecast? = null,
     val pop: Double = 0.0,
     val visibility: Int = 0,
-    val weather: List<Weather> = emptyList(),
-    val wind: Wind? = null
+    val weather: List<WeatherForecast> = emptyList(),
+    val wind: WindForecast? = null
+)
+
+data class WindForecast(
+    val deg: Int = 0,
+    val gust: Double = 0.0,
+    val speed: Double = 0.0
+)
+
+data class WeatherForecast(
+    val description: String = "",
+    val icon: String = "",
+    val id: Int = 0,
+    val main: String = ""
+)
+
+data class CloudsForecast(
+    val all: Int = 0
+)
+
+data class MainForecast(
+    val feels_like: Double = 0.0,
+    val humidity: Int = 0,
+    val pressure: Int = 0,
+    val temp: Double = 0.0,
+    val temp_max: Double = 0.0,
+    val temp_min: Double = 0.0
 )

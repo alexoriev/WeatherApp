@@ -1,9 +1,7 @@
 package com.grigorev.weatherapp.domain
 
-interface WeatherRepository {
+interface CurrentWeatherRepository {
 
     suspend fun getCurrentWeather(): CurrentWeather
-
-    suspend fun getFiveDaysForecast(): List<Forecast>
 
 }

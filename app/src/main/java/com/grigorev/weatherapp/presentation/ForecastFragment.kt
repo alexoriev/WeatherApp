@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class ForecastFragment : Fragment() {
 
     private lateinit var binding: FragmentForecastBinding
-    private val viewModel: WeatherViewModel by activityViewModels()
+    private val viewModel: ForecastViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

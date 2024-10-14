@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.grigorev.weatherapp.data.CurrentWeatherRepositoryImpl
 import com.grigorev.weatherapp.domain.CurrentWeather
-import com.grigorev.weatherapp.domain.FiveDaysForecast
-import com.grigorev.weatherapp.data.WeatherRepositoryImpl
+import com.grigorev.weatherapp.domain.GetCurrentWeatherUseCase
 import com.grigorev.weatherapp.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,18 +25,11 @@ val emptyWeather = CurrentWeather(
     wind = null
 )
 
-val emptyForecast = FiveDaysForecast(
-    city = null,
-    cnt = 0,
-    list = emptyList(),
-    message = 0,
-)
-
-//TODO: Split into separate LiveData classes for different fragments
 class WeatherViewModel : ViewModel() {
 
     //TODO: Implement via DI
-    private val repository = WeatherRepositoryImpl()
+    private val repository = CurrentWeatherRepositoryImpl()
+    private val getCurrentWeatherUseCase = GetCurrentWeatherUseCase(repository)
 
     private val _error = SingleLiveEvent<Throwable>()
     val error: LiveData<Throwable>
@@ -44,28 +37,14 @@ class WeatherViewModel : ViewModel() {
 
     var weather = MutableLiveData(emptyWeather)
 
-    var forecast = MutableLiveData(emptyForecast.list)
-
     fun getWeather() = viewModelScope.launch {
         withContext(Dispatchers.Default) {
             try {
-                val currentWeather = repository.getCurrentWeather()
+                val currentWeather = getCurrentWeatherUseCase.getCurrentWeather()
                 weather.postValue(currentWeather)
             } catch (e: Exception) {
                 _error.postValue(e)
             }
         }
     }
-
-    fun getForecast() = viewModelScope.launch {
-        withContext(Dispatchers.Default) {
-            try {
-                val fiveDaysForecast = repository.getFiveDaysForecast()
-                forecast.postValue(fiveDaysForecast)
-            } catch (e: Exception) {
-                _error.postValue(e)
-            }
-        }
-    }
-
 }
