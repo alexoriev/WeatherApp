@@ -1,4 +1,4 @@
-package com.grigorev.weatherapp.util
+package com.grigorev.weatherapp.data
 
 import java.util.Locale
 

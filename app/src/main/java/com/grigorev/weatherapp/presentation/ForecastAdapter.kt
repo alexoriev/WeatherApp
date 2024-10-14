@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.ItemForecastBinding
 import com.grigorev.weatherapp.domain.Forecast
-import com.grigorev.weatherapp.util.TimeConverter
 
 class ForecastAdapter : ListAdapter<Forecast, ViewHolder>(PostDiffCallback()) {
 
@@ -40,21 +39,21 @@ class ViewHolder(private val binding: ItemForecastBinding) : RecyclerView.ViewHo
 
             temperature.text = temperature.context.getString(
                 R.string.temperature_forecast_item,
-                forecast.main?.temp?.toInt().toString()
+                forecast.main?.temp
             )
-            forecastText.text = forecast.weather[0].main
-            dateTime.text = forecast.dt?.let { TimeConverter().formatUnixTimeToDateTime(it) }
+            forecastText.text = forecast.description
+            dateTime.text = forecast.dateTime
             humidity.text = humidity.context.getString(
                 R.string.humidity_text,
-                forecast.main?.humidity.toString()
+                forecast.main?.humidity
             )
             windSpeed.text = windSpeed.context.getString(
                 R.string.wind_speed_text,
-                forecast.wind?.speed?.toInt().toString()
+                forecast.wind?.speed
             )
             pressure.text = pressure.context.getString(
                 R.string.pressure_text,
-                forecast.main?.pressure.toString()
+                forecast.main?.pressure
             )
         }
     }

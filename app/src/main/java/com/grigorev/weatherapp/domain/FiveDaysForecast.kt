@@ -5,14 +5,16 @@ data class FiveDaysForecast(
 )
 
 data class Forecast(
-    val dt: Int?,
+    val dateTime: String?,
     val main: MainForecast?,
+    val iconUrl: String?,
+    val description: String?,
     val weather: List<WeatherForecast> = emptyList(),
     val wind: WindForecast?
 )
 
 data class WindForecast(
-    val speed: Double?
+    val speed: String?
 )
 
 data class WeatherForecast(
@@ -21,7 +23,7 @@ data class WeatherForecast(
 )
 
 data class MainForecast(
-    val humidity: Int?,
-    val pressure: Int?,
-    val temp: Double?,
+    val humidity: String?,
+    val pressure: String?,
+    val temp: String?,
 )

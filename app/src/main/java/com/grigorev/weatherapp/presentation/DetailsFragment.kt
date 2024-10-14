@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.FragmentDetailsBinding
-import com.grigorev.weatherapp.util.TimeConverter
 
 class DetailsFragment : Fragment() {
 
@@ -30,50 +29,45 @@ class DetailsFragment : Fragment() {
         val currentWeather = viewModel.weather.value
 
         binding.apply {
-            dateTime.text = currentWeather!!.dt?.let { TimeConverter().formatUnixTimeToDateTime(it) }
-            weatherDescription.text = currentWeather.weather[0].description
-            temperature.text = currentWeather.main?.temp?.toInt().toString()
+            dateTime.text = currentWeather!!.dateTime
+            weatherDescription.text = currentWeather.description
+            temperature.text = currentWeather.main?.temp
             feelsLike.text = context?.getString(
                 R.string.feels_like,
-                currentWeather.main?.feelsLike?.toInt().toString()
+                currentWeather.main?.feelsLike
             )
             humidity.text = context?.getString(
                 R.string.humidity_text,
-                currentWeather.main?.humidity.toString()
+                currentWeather.main?.humidity
             )
             cloudiness.text = context?.getString(
                 R.string.cloudiness_text,
-                currentWeather.clouds?.all.toString()
+                currentWeather.clouds?.all
             )
             visibility.text = context?.getString(
                 R.string.visibility_text,
-                currentWeather.visibility.toString()
+                currentWeather.visibility
             )
             windSpeed.text = context?.getString(
                 R.string.wind_speed_text,
-                currentWeather.wind?.speed.toString()
+                currentWeather.wind?.speed
             )
             windDegrees.text = context?.getString(
                 R.string.wind_degrees_text,
-                currentWeather.wind?.deg.toString()
+                currentWeather.wind?.deg
             )
             windGust.text = context?.getString(
                 R.string.wind_gust_text,
-                currentWeather.wind?.gust.toString()
+                currentWeather.wind?.gust
             )
             pressure.text = context?.getString(
                 R.string.pressure_text,
-                currentWeather.main?.pressure.toString()
+                currentWeather.main?.pressure
             )
-            sunrise.text = currentWeather.sys?.sunrise?.let {
-                TimeConverter().formatUnixTimeToTime(
-                    it
-                )
-            }
-            sunset.text = currentWeather.sys?.sunset?.let { TimeConverter().formatUnixTimeToTime(it) }
+            sunrise.text = currentWeather.sys?.sunrise
+            sunset.text = currentWeather.sys?.sunset
 
-            val iconUrl =
-                "https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png"
+            val iconUrl = currentWeather.iconUrl
 
             Glide.with(weatherIcon)
                 .load(iconUrl)

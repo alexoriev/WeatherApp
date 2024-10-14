@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
 import com.grigorev.weatherapp.databinding.FragmentCurrentWeatherBinding
-import com.grigorev.weatherapp.util.TimeConverter
 import kotlinx.coroutines.launch
 
 class CurrentWeatherFragment : Fragment() {
@@ -47,32 +46,27 @@ class CurrentWeatherFragment : Fragment() {
                 binding.apply {
                     binding.progressBar.visibility = View.GONE
                     binding.celsius.visibility = View.VISIBLE
-                    dateTime.text = currentWeather!!.dt?.let {
-                        TimeConverter().formatUnixTimeToDateTime(
-                            it
-                        )
-                    }
-                    weatherDescription.text = currentWeather.weather[0].main
-                    temperature.text = currentWeather.main?.temp?.toInt().toString()
+                    dateTime.text = currentWeather?.dateTime
+                    weatherDescription.text = currentWeather?.description
+                    temperature.text = currentWeather?.main?.temp
                     feelsLike.text = context?.getString(
                         R.string.feels_like,
-                        currentWeather.main?.feelsLike?.toInt().toString()
+                        currentWeather?.main?.feelsLike
                     )
                     humidity.text = context?.getString(
                         R.string.humidity_text,
-                        currentWeather.main?.humidity.toString(),
+                        currentWeather?.main?.humidity
                     )
                     windSpeed.text = context?.getString(
                         R.string.wind_speed_text,
-                        currentWeather.wind?.speed.toString(),
+                        currentWeather?.wind?.speed,
                     )
                     pressure.text = context?.getString(
                         R.string.pressure_text,
-                        currentWeather.main?.pressure.toString(),
+                        currentWeather?.main?.pressure,
                     )
 
-                    val iconUrl =
-                        "https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png"
+                    val iconUrl = currentWeather?.iconUrl
 
                     Glide.with(weatherIcon)
                         .load(iconUrl)

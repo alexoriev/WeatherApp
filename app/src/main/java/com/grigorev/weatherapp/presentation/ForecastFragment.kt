@@ -22,7 +22,7 @@ class ForecastFragment : Fragment() {
     ): View {
         binding = FragmentForecastBinding.inflate(layoutInflater)
         lifecycleScope.launch {
-            if (viewModel.forecast.value == emptyForecast) {
+            if (viewModel.forecast.value == emptyForecast.list) {
                 viewModel.getForecast().join()
             } else {
                 binding.progressBar.visibility = View.GONE

@@ -13,11 +13,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 val emptyWeather = CurrentWeather(
+    description = null,
+    iconUrl = null,
     clouds = null,
-    dt = 0,
+    dateTime = null,
     main = null,
     sys = null,
-    visibility = 0,
+    visibility = null,
     weather = emptyList(),
     wind = null
 )

@@ -1,24 +1,26 @@
 package com.grigorev.weatherapp.domain
 
 data class CurrentWeather(
+    val description: String?,
+    val iconUrl: String?,
     val clouds: Clouds?,
-    val dt: Int?,
+    val dateTime: String?,
     val main: Main?,
     val sys: Sys?,
-    val visibility: Int?,
+    val visibility: String?,
     val weather: List<Weather> = emptyList(),
     val wind: Wind?
 )
 
 data class Sys(
-    val sunrise: Int?,
-    val sunset: Int?
+    val sunrise: String?,
+    val sunset: String?
 )
 
 data class Wind(
-    val deg: Int?,
-    val gust: Double?,
-    val speed: Double?
+    val deg: String?,
+    val gust: String?,
+    val speed: String?
 )
 
 data class Weather(
@@ -28,12 +30,12 @@ data class Weather(
 )
 
 data class Clouds(
-    val all: Int?
+    val all: String?
 )
 
 data class Main(
-    val feelsLike: Double?,
-    val humidity: Int?,
-    val pressure: Int?,
-    val temp: Double?
+    val feelsLike: String?,
+    val humidity: String?,
+    val pressure: String?,
+    val temp: String?
 )

@@ -5,7 +5,7 @@ import com.grigorev.weatherapp.domain.Forecast
 
 class FiveDaysForecastRepositoryImpl : FiveDaysForecastRepository {
 
-    private val mapper = FiveDaysForecastMapper();
+    private val mapper = FiveDaysForecastMapper()
 
     override suspend fun getFiveDaysForecast(): List<Forecast> {
         lateinit var forecast: List<Forecast>

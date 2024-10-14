@@ -16,30 +16,46 @@ import com.grigorev.weatherapp.domain.Wind
 class CurrentWeatherMapper {
     fun mapCurrentWeatherFromDto(dto: CurrentWeatherDto?): CurrentWeather? = dto?.let {
         CurrentWeather(
+            description = mapDescriptionFromDto(it.weather),
+            iconUrl = mapIconUrlFromDto(it.weather),
             clouds = mapCloudsFromDto(it.clouds),
-            dt = it.dt,
+            dateTime = it.dt?.let { dateTime -> TimeConverter().formatUnixTimeToDateTime(dateTime) },
             main = mapMainFromDto(it.main),
             sys = mapSysFromDto(it.sys),
-            visibility = it.visibility,
+            visibility = it.visibility.toString(),
             weather = mapWeatherFromDto(it.weather),
-            wind = mapWindFromDto(it.wind))
+            wind = mapWindFromDto(it.wind)
+        )
+    }
+
+    private fun mapDescriptionFromDto(dto: List<WeatherDto>): String? {
+        return if (dto.isNotEmpty()) {
+            dto[0].main
+        } else null
+    }
+
+    private fun mapIconUrlFromDto(dto: List<WeatherDto>): String? {
+        return if (dto.isNotEmpty()) {
+            "https://openweathermap.org/img/wn/${dto[0].icon}.png"
+        } else null
     }
 
     private fun mapCloudsFromDto(dto: CloudsDto?): Clouds? = dto?.let {
-        Clouds(it.all)
+        Clouds(it.all.toString())
     }
 
     private fun mapMainFromDto(dto: MainDto?): Main? = dto?.let {
         Main(
-            feelsLike = it.feelsLike,
-            humidity = it.humidity,
-            pressure = it.pressure,
-            temp = it.temp
+            feelsLike = it.feelsLike?.toInt().toString(),
+            humidity = it.humidity.toString(),
+            pressure = it.pressure.toString(),
+            temp = it.temp?.toInt().toString()
         )
     }
 
     private fun mapSysFromDto(dto: SysDto?): Sys? = dto?.let {
-        Sys(sunrise = it.sunrise, sunset = it.sunset)
+        Sys(sunrise = it.sunrise?.let { value -> TimeConverter().formatUnixTimeToTime(value) },
+            sunset = it.sunset?.let { value -> TimeConverter().formatUnixTimeToTime(value) })
     }
 
     private fun mapWeatherFromDto(dto: List<WeatherDto>): List<Weather> {
@@ -50,8 +66,9 @@ class CurrentWeatherMapper {
 
     private fun mapWindFromDto(dto: WindDto?): Wind? = dto?.let {
         Wind(
-            deg = it.deg,
-            gust = it.gust,
-            speed = it.speed)
+            deg = it.deg.toString(),
+            gust = it.gust.toString(),
+            speed = it.speed.toString()
+        )
     }
 }
