@@ -45,57 +45,66 @@ class DetailsFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[DetailsViewModel::class.java]
 
         lifecycleScope.launch {
-            viewModel.getWeather().join()
-        }
-
-        viewModel.weather.observe(viewLifecycleOwner) { currentWeather ->
             binding.apply {
-                dateTime.text = currentWeather!!.dateTime
-                weatherDescription.text = currentWeather.description
-                temperature.text = currentWeather.main?.temp
-                feelsLike.text = context?.getString(
-                    R.string.feels_like,
-                    currentWeather.main?.feelsLike
-                )
-                humidity.text = context?.getString(
-                    R.string.humidity_text,
-                    currentWeather.main?.humidity
-                )
-                cloudiness.text = context?.getString(
-                    R.string.cloudiness_text,
-                    currentWeather.clouds?.all
-                )
-                visibility.text = context?.getString(
-                    R.string.visibility_text,
-                    currentWeather.visibility
-                )
-                windSpeed.text = context?.getString(
-                    R.string.wind_speed_text,
-                    currentWeather.wind?.speed
-                )
-                windDegrees.text = context?.getString(
-                    R.string.wind_degrees_text,
-                    currentWeather.wind?.deg
-                )
-                windGust.text = if (currentWeather.wind?.gust != null) {
-                    context?.getString(
-                        R.string.wind_gust_text,
-                        currentWeather.wind.gust
+                groupVisibility.visibility = View.GONE
+                progressBar.visibility = View.VISIBLE
+            }
+
+            viewModel.getWeather().join()
+
+            viewModel.weather.observe(viewLifecycleOwner) { currentWeather ->
+                binding.apply {
+                    groupVisibility.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
+                    dateTime.text = currentWeather!!.dateTime
+                    weatherDescription.text = currentWeather.description
+                    temperature.text = currentWeather.main?.temp
+                    feelsLike.text = context?.getString(
+                        R.string.feels_like,
+                        currentWeather.main?.feelsLike
                     )
-                } else "n/a"
-                pressure.text = context?.getString(
-                    R.string.pressure_text,
-                    currentWeather.main?.pressure
-                )
-                sunrise.text = currentWeather.sys?.sunrise
-                sunset.text = currentWeather.sys?.sunset
+                    humidity.text = context?.getString(
+                        R.string.humidity_text,
+                        currentWeather.main?.humidity
+                    )
+                    cloudiness.text = context?.getString(
+                        R.string.cloudiness_text,
+                        currentWeather.clouds?.all
+                    )
+                    visibility.text = context?.getString(
+                        R.string.visibility_text,
+                        currentWeather.visibility
+                    )
+                    windSpeed.text = context?.getString(
+                        R.string.wind_speed_text,
+                        currentWeather.wind?.speed
+                    )
+                    windDegrees.text = context?.getString(
+                        R.string.wind_degrees_text,
+                        currentWeather.wind?.deg
+                    )
+                    windGust.text = if (currentWeather.wind?.gust != null) {
+                        context?.getString(
+                            R.string.wind_gust_text,
+                            currentWeather.wind.gust
+                        )
+                    } else "n/a"
+                    pressure.text = context?.getString(
+                        R.string.pressure_text,
+                        currentWeather.main?.pressure
+                    )
+                    sunrise.text = currentWeather.sys?.sunrise
+                    sunset.text = currentWeather.sys?.sunset
 
-                val iconUrl = currentWeather.iconUrl
+                    val iconUrl = currentWeather.iconUrl
 
-                Glide.with(weatherIcon)
-                    .load(iconUrl)
-                    .into(weatherIcon)
+                    Glide.with(weatherIcon)
+                        .load(iconUrl)
+                        .into(weatherIcon)
+                }
             }
         }
+
+
     }
 }

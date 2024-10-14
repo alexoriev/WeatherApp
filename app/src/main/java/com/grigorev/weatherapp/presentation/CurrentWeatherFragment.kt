@@ -47,56 +47,52 @@ class CurrentWeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[CurrentWeatherViewModel::class.java]
 
         lifecycleScope.launch {
-            if (viewModel.weather.value == emptyWeather) {
-                binding.celsius.visibility = View.INVISIBLE
-                viewModel.getWeather().join()
-            }
+            binding.visibilityGroup.visibility = View.INVISIBLE
+            viewModel.getWeather().join()
 
             viewModel.weather.observe(viewLifecycleOwner) {
-                if (it != emptyWeather) {
-                    binding.apply {
-                        progressBar.visibility = View.GONE
-                        celsius.visibility = View.VISIBLE
-                        dateTime.text = it?.dateTime
-                        weatherDescription.text = it?.description
-                        temperature.text = it?.main?.temp
-                        feelsLike.text = context?.getString(
-                            R.string.feels_like,
-                            it?.main?.feelsLike
-                        )
-                        humidity.text = context?.getString(
-                            R.string.humidity_text,
-                            it?.main?.humidity
-                        )
-                        windSpeed.text = context?.getString(
-                            R.string.wind_speed_text,
-                            it?.wind?.speed,
-                        )
-                        pressure.text = context?.getString(
-                            R.string.pressure_text,
-                            it?.main?.pressure,
-                        )
+                binding.apply {
+                    progressBar.visibility = View.GONE
+                    visibilityGroup.visibility = View.VISIBLE
+                    dateTime.text = it?.dateTime
+                    weatherDescription.text = it?.description
+                    temperature.text = it?.main?.temp
+                    feelsLike.text = context?.getString(
+                        R.string.feels_like,
+                        it?.main?.feelsLike
+                    )
+                    humidity.text = context?.getString(
+                        R.string.humidity_text,
+                        it?.main?.humidity
+                    )
+                    windSpeed.text = context?.getString(
+                        R.string.wind_speed_text,
+                        it?.wind?.speed,
+                    )
+                    pressure.text = context?.getString(
+                        R.string.pressure_text,
+                        it?.main?.pressure,
+                    )
 
-                        val iconUrl = it?.iconUrl
+                    val iconUrl = it?.iconUrl
 
-                        Glide.with(weatherIcon)
-                            .load(iconUrl)
-                            .into(weatherIcon)
+                    Glide.with(weatherIcon)
+                        .load(iconUrl)
+                        .into(weatherIcon)
 
-                        buttonDetails.setOnClickListener {
-                            findNavController().navigate(R.id.detailsFragment)
-                        }
+                    buttonDetails.setOnClickListener {
+                        findNavController().navigate(R.id.detailsFragment)
+                    }
 
-                        buttonForecast.setOnClickListener {
-                            findNavController().navigate(R.id.forecastFragment)
-                        }
+                    buttonForecast.setOnClickListener {
+                        findNavController().navigate(R.id.forecastFragment)
                     }
                 }
             }
+        }
 
-            viewModel.error.observe(viewLifecycleOwner) {
-                Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-            }
+        viewModel.error.observe(viewLifecycleOwner) {
+            Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
         }
     }
 }

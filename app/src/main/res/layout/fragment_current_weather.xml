@@ -14,10 +14,17 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/temperature"
-        app:layout_constraintBottom_toBottomOf="@id/temperature"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/visibilityGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="city_name, date_time, weather_icon, weather_description,
+        temperature, celsius, feels_like, details_cards, buttons" />
 
     <TextView
         android:id="@+id/city_name"
@@ -119,6 +126,7 @@
         app:layout_constraintGuide_percent="0.55" />
 
     <LinearLayout
+        android:id="@+id/details_cards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -248,6 +256,7 @@
         app:layout_constraintGuide_percent="0.77" />
 
     <LinearLayout
+        android:id="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -262,7 +271,8 @@
             android:background="@drawable/transparent_bg_bordered_button"
             android:backgroundTint="@android:color/transparent"
             android:text="@string/details"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
         <androidx.legacy.widget.Space
             android:layout_width="16dp"
@@ -274,7 +284,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/transparent_bg_bordered_button"
             android:text="@string/forecast"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

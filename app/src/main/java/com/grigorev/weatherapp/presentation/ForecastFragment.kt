@@ -53,7 +53,6 @@ class ForecastFragment : Fragment() {
             adapter.submitList(it)
         }
 
-
         viewModel.error.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
         }
