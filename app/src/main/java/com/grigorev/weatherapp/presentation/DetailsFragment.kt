@@ -1,13 +1,12 @@
 package com.grigorev.weatherapp.presentation
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.grigorev.weatherapp.R
@@ -17,11 +16,12 @@ import javax.inject.Inject
 
 class DetailsFragment : Fragment() {
 
-    private lateinit var binding: FragmentDetailsBinding
-    private lateinit var viewModel: DetailsViewModel
+    private var _binding: FragmentDetailsBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    private val viewModel by viewModels<DetailsViewModel> { viewModelFactory }
 
     private val component by lazy {
         (requireActivity().application as WeatherApp).component
@@ -36,14 +36,11 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDetailsBinding.inflate(layoutInflater)
+        _binding = FragmentDetailsBinding.inflate(layoutInflater)
         return binding.root
     }
 
-    @SuppressLint("StringFormatInvalid")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProvider(this, viewModelFactory)[DetailsViewModel::class.java]
-
         lifecycleScope.launch {
             binding.apply {
                 groupVisibility.visibility = View.GONE
@@ -104,7 +101,10 @@ class DetailsFragment : Fragment() {
                 }
             }
         }
+    }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

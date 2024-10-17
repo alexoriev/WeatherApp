@@ -10,7 +10,7 @@ class CurrentWeatherRepositoryImpl @Inject constructor(
 ) : CurrentWeatherRepository {
 
     override suspend fun getCurrentWeather(): CurrentWeather {
-        lateinit var currentWeather: CurrentWeather
+        val currentWeather: CurrentWeather
         try {
             val response = apiService.getCurrentWeather()
             if (!response.isSuccessful) {

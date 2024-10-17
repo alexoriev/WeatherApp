@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.grigorev.weatherapp.databinding.FragmentForecastBinding
 import kotlinx.coroutines.launch
@@ -15,11 +14,12 @@ import javax.inject.Inject
 
 class ForecastFragment : Fragment() {
 
-    private lateinit var binding: FragmentForecastBinding
-    private lateinit var viewModel: ForecastViewModel
+    private var _binding: FragmentForecastBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+    private val viewModel by viewModels<ForecastViewModel> { viewModelFactory }
 
     private val component by lazy {
         (requireActivity().application as WeatherApp).component
@@ -34,9 +34,7 @@ class ForecastFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentForecastBinding.inflate(layoutInflater)
-
-        viewModel = ViewModelProvider(this, viewModelFactory)[ForecastViewModel::class.java]
+        _binding = FragmentForecastBinding.inflate(layoutInflater)
 
         viewModel.forecast.observe(viewLifecycleOwner) {
             if (it == emptyForecast.list) {
@@ -53,10 +51,11 @@ class ForecastFragment : Fragment() {
             adapter.submitList(it)
         }
 
-        viewModel.error.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
-        }
-
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

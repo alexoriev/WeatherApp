@@ -10,7 +10,7 @@ class FiveDaysForecastRepositoryImpl @Inject constructor(
 ) : FiveDaysForecastRepository {
 
     override suspend fun getFiveDaysForecast(): List<Forecast> {
-        lateinit var forecast: List<Forecast>
+        val forecast: List<Forecast>
         try {
             val response = apiService.getFiveDaysForecast()
             if (!response.isSuccessful) {
