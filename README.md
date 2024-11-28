@@ -10,7 +10,6 @@
 - также на экране расположены 2 кнопки: Details, Forecast (переход на соответстующие экраны).
 - на экране Details показана более детальная информация о текущей погоде (на основе полученного ответа от API).
 - на экране Forecast отображается полученный от API прогноз погоды на ближайшие 5 дней каждые 3 часа.
-- приложение должно уметь обрабатывать ошибки от API и отсутствие подключения к интернету, работать стабильно и не "вешать UI".
 - у приложения должен быть АДЕКВАТНЫЙ и приятный дизайн.
 
 Стек:
@@ -31,4 +30,3 @@
 <img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/faa1dced-076d-414e-8198-f37a20e2030f" width="150" />
 <img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/0f4f5885-7568-475d-84ec-7cf05670e004" width="150" />
 <img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/b36fa51a-8fae-4d13-9ef0-af8fcd837c87" width="150" />
-<img src="https://github.com/aleksandrgrigorev/WeatherApp/assets/102324677/080d1780-4958-4d11-8012-32c73768e561" width="150" />
